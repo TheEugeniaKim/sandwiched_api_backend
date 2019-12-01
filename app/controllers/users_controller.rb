@@ -23,7 +23,6 @@ class UsersController < ApplicationController
         @user = User.new(user_params)
         if @user.valid?
             @user.save
-            User.create(:director_id => session[:user]["id"], :movie_id => @movie.id)
         else
             render :new
         end
@@ -34,3 +33,4 @@ class UsersController < ApplicationController
         params.require(:user).permit(:first_name, :last_name, :email, :password, :birthday, :phone)
     end
 end
+

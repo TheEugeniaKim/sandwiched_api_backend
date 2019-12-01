@@ -1,25 +1,25 @@
 class OrdersController < ApplicationController
     def index 
-        render json: Orders.all
+        render json: Order.all
     end
 
     def show 
-        render json: Orders.find(params[:id])
+        render json: Order.find(params[:id])
     end 
 
     def create
-        @order = Order.new()
+        @order = Order.new(order_params)
+        if @order.valid?
+            @order.save
+            render json: @order 
+        else
+            render :new
+        end
     end
 
-end
-
-def create
-    @director = Director.new(director_params)
-    if @director.valid?
-        @director.save
-        session[:user] = @director
-        redirect_to director_path(@director)
-    else
-        render :new
+    private
+    def order_params
+        params.require(:order).permit(:user_id)
     end
+
 end
