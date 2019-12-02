@@ -9,13 +9,11 @@ class UsersController < ApplicationController
     end 
 
     def login 
-    
         user = User.find_by(email: params[:email])
-            
         if user 
             render json: user 
         else
-            flash[:message] = "User Not Found. Please Try Again"
+            render json: {error: "User Not Found. Please Try Again"}
         end
     end
 
