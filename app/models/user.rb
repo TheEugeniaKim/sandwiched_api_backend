@@ -5,4 +5,8 @@ class User < ApplicationRecord
     def recent_orders
         Order.where(user_id:self.id).order(created_at: :desc).limit(5)
     end
+
+    def favorites 
+        FavoriteSandwich.where(user_id:self.id)
+    end
 end

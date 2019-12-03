@@ -10,10 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_21_195132) do
+ActiveRecord::Schema.define(version: 2019_12_03_191709) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "favorite_sandwiches", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "sandwich_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["sandwich_id"], name: "index_favorite_sandwiches_on_sandwich_id"
+    t.index ["user_id"], name: "index_favorite_sandwiches_on_user_id"
+  end
 
   create_table "ingredients", force: :cascade do |t|
     t.string "name"
@@ -69,6 +78,8 @@ ActiveRecord::Schema.define(version: 2019_11_21_195132) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "favorite_sandwiches", "sandwiches"
+  add_foreign_key "favorite_sandwiches", "users"
   add_foreign_key "orders", "users"
   add_foreign_key "sandwich_ingredients", "ingredients"
   add_foreign_key "sandwich_ingredients", "sandwiches"
