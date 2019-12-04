@@ -8,4 +8,20 @@ class FavoriteSandwichController < ApplicationController
         render json: FavoriteSandwich.find(params[:id])
     end 
 
+    def create
+        @favorite_sandwich = FavoriteSandwich.new(favorite_sandwich_params)
+        if @favorite_sandwich.valid? 
+            @favorite_sandwich.save
+            render json: @favorite_sandwich
+        else
+            render json: {error: "Already Added this sandwich to Favoritesex"}
+        end
+    end
+
+    private
+
+    def favorite_sandwich_params
+        params.require(:favorite_sandwich).permit(:user_id, :sandwich_id)
+    end
+
 end
