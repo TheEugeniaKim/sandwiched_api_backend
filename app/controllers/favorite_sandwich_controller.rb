@@ -10,11 +10,13 @@ class FavoriteSandwichController < ApplicationController
 
     def create
         @favorite_sandwich = FavoriteSandwich.new(favorite_sandwich_params)
-        if @favorite_sandwich.valid? 
+        if @favorite_sandwich.valid?
             @favorite_sandwich.save
-            render json: @favorite_sandwich
+
+
+            render json: {payload: @favorite_sandwich}
         else
-            render json: {error: "Already Added this sandwich to Favoritesex"}
+            render json: {error: "Already Added this sandwich to Favorites"}
         end
     end
 

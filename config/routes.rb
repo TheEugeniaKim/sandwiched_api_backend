@@ -5,7 +5,6 @@ Rails.application.routes.draw do
   resources :sandwiches
   resources :ingredients
   resources :users
-  resources :favorite_sandwich
 
   post 'users/login/', to: 'users#login'
   post 'orders', to: 'orders#create'

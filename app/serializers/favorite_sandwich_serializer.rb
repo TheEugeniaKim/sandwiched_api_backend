@@ -1,5 +1,4 @@
 class FavoriteSandwichSerializer < ActiveModel::Serializer
-  attributes :id
-  belongs_to :user
-  has_many :sandwiches
+  attributes :id, :user_id, :sandwich_id
+  
 end
